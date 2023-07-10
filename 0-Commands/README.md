@@ -63,6 +63,11 @@ Or
 Both the above commands have their own challenges. While one of it cannot accept a selector the other cannot accept a node port. I would recommend going with the `kubectl expose` command. If you need to specify a node port, generate a definition file using the same command and manually input the nodeport before creating the service.
 ```
 
+*** Test a Service
+```
+kubectl run -it load-testing --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "wget -q -O- http://nginx.default.svc.cluster.local:80"
+kubectl run -it load-testing --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://nginx.default.svc.cluster.local:80; done"
+```
 
 ## Get number of pods per node
 ```
